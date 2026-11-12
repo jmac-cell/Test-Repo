@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Paste a GitHub issue. Get a score out of 100 and the roast you deserve. 100% rule-based — no AI, no API keys, no mercy.">
+<title>Roast My GitHub Issue 🔥</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <span class="logo mono">🔥 roast-my-issue</span>
+  <span class="tagline mono">rule-based roasting since 2024</span>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Your issue is bad.<br><span class="accent">We can prove it.</span></h1>
+    <p class="sub">Paste a GitHub issue — or drop a link to a public one. Our fully transparent roast engine scores it out of 100 on <strong>clarity</strong>, <strong>specificity</strong> and <strong>completeness</strong>, then tells you exactly what’s missing. No AI. No API keys. No mercy.</p>
+  </section>
+
+  <section class="panel input-panel">
+    <label class="field-label mono" for="issue-url">GitHub issue URL <span class="muted">(optional — public issues only)</span></label>
+    <div class="url-row">
+      <input id="issue-url" type="url" placeholder="https://github.com/owner/repo/issues/123" autocomplete="off" spellcheck="false">
+      <button id="fetch-btn" class="btn ghost" type="button">Fetch</button>
+    </div>
+    <p id="fetch-status" class="status mono" aria-live="polite"></p>
+
+    <label class="field-label mono" for="issue-text">The issue itself</label>
+    <textarea id="issue-text" rows="12" placeholder="[Bug] The thing is broken&#10;&#10;It doesn't work. Please fix ASAP." spellcheck="true"></textarea>
+    <p id="input-error" class="error mono" aria-live="polite"></p>
+
+    <div class="actions">
+      <button id="roast-btn" class="btn primary" type="button">Roast My Issue</button>
+      <button id="example-btn" class="btn ghost" type="button">Load a terrible example</button>
+    </div>
+  </section>
+
+  <section id="result" class="panel result hidden" aria-live="polite">
+    <div class="result-grid">
+      <div class="score-card">
+        <div class="gauge">
+          <svg viewBox="0 0 200 200" role="img" aria-label="Issue score gauge">
+            <circle class="gauge-track" cx="100" cy="100" r="84"></circle>
+            <circle class="gauge-fill" id="gauge-fill" cx="100" cy="100" r="84"></circle>
+          </svg>
+          <div class="gauge-center">
+            <div class="score-number mono" id="score-number">0</div>
+            <div class="score-outof mono">/ 100</div>
+          </div>
+        </div>
+        <div class="verdict mono" id="verdict-label">—</div>
+        <div class="flames" id="flame-meter" aria-hidden="true"></div>
+      </div>
+      <div class="roast-card">
+        <h2 class="section-title">The roast</h2>
+        <div id="roast-text"></div>
+        <div id="flag-chips" class="chips"></div>
+        <h2 class="section-title">What’s missing</h2>
+        <ul id="missing-list" class="missing"></ul>
+        <ul id="present-list" class="present"></ul>
+      </div>
+    </div>
+
+    <h2 class="section-title">Why this score <span class="muted small">(it’s just rules — every point accounted for)</span></h2>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-head"><span class="mono">Clarity</span><span class="mono pillar-score" id="clarity-score">0/35</span></div>
+        <div class="bar"><div class="bar-fill" id="clarity-bar"></div></div>
+        <p class="caption">Is the request readable and unambiguous?</p>
+        <ul class="notes mono" id="clarity-notes"></ul>
+      </div>
+      <div class="pillar">
+        <div class="pillar-head"><span class="mono">Specificity</span><span class="mono pillar-score" id="specificity-score">0/35</span></div>
+        <div class="bar"><div class="bar-fill" id="specificity-bar"></div></div>
+        <p class="caption">Versions, errors, files — receipts.</p>
+        <ul class="notes mono" id="specificity-notes"></ul>
+      </div>
+      <div class="pillar">
+        <div class="pillar-head"><span class="mono">Completeness</span><span class="mono pillar-score" id="completeness-score">0/30</span></div>
+        <div class="bar"><div class="bar-fill" id="completeness-bar"></div></div>
+        <p class="caption">The sections a stranger needs to act.</p>
+        <ul class="notes mono" id="completeness-notes"></ul>
+      </div>
+    </div>
+
+    <div class="share-row">
+      <button id="copy-btn" class="btn primary" type="button">Copy scorecard for X</button>
+      <a id="x-share" class="btn ghost" target="_blank" rel="noopener">Post on X ↗</a>
+    </div>
+    <p class="share-hint mono">Screenshot-friendly. Send it to the issue author. Or don’t. (Do.)</p>
+  </section>
+</main>
+
+<footer class="site-footer mono">
+  <span>No AI · No API keys · 100% deterministic grudges · Everything runs in your browser</span>
+  <span class="muted">© <span id="year"></span> — roast responsibly</span>
+</footer>
+
+<noscript><p class="noscript">This site needs JavaScript — the roasting engine is five hundred lines of it.</p></noscript>
+<script src="script.js"></script>
+</body>
+</html>
